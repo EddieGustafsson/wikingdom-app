@@ -22,6 +22,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.mukesh.MarkdownView;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                jsonParse("Viktigt", true);
+                jsonParse("Captain America", true);
             }
 
         });
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.fragment_home);
         final TextView wikiTitle = findViewById(R.id.wikiTitle);
         final TextView wikiDate = findViewById(R.id.wikiDate);
-        final TextView wikiSource = findViewById(R.id.wikiSource);
+        final MarkdownView wikiSource = (MarkdownView) findViewById(R.id.wikiSource);
 
         StringRequest strRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>()
@@ -93,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
                     {
                         try {
                             JSONArray jsonArray = new JSONObject(response).getJSONArray("sidor");
-                            Log.d("JSON", "------------------------------------------\n\n");
 
                             for(int i = 0; i < jsonArray.length(); i++){
                                 JSONObject page = jsonArray.getJSONObject(i);
@@ -105,11 +105,12 @@ public class MainActivity extends AppCompatActivity {
 
                                     wikiTitle.setText(title);
                                     wikiDate.setText(date);
-                                    wikiSource.setText(source);
-                                    wikiSource.setMovementMethod(new ScrollingMovementMethod());
+                                    wikiSource.setMarkDownText(source);
 
                                     if(debug){
+                                        Log.d("JSON", "--------------START OF DEBUG--------------\n\n");
                                         Log.d("JSON", title + ", " + date + ", " + source);
+                                        Log.d("JSON", "---------------END OF DEBUG---------------\n\n");
                                     }
                                     break;
                                 }

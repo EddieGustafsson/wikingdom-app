@@ -79,7 +79,7 @@
             android:text="@string/tab_history" />
     </com.google.android.material.tabs.TabLayout>
 
-    <TextView
+    <com.mukesh.MarkdownView
         android:id="@+id/wikiSource"
         android:layout_width="359dp"
         android:layout_height="440dp"
