@@ -12,6 +12,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 
@@ -28,11 +29,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                jsonParse();
+                jsonParse("Viktigt", true);
             }
 
         });
@@ -73,9 +76,14 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
-    public void jsonParse(){
+    public void jsonParse(final String title, final boolean debug){
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://10.130.216.101/TP/api.php"; //http://webhook.site/40b51970-0aef-4c5e-84c4-358e41aa3b67
+        String url = "http://10.130.216.101/TP/api.php";
+
+        setContentView(R.layout.fragment_home);
+        final TextView wikiTitle = findViewById(R.id.wikiTitle);
+        final TextView wikiDate = findViewById(R.id.wikiDate);
+        final TextView wikiSource = findViewById(R.id.wikiSource);
 
         StringRequest strRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>()
@@ -90,12 +98,24 @@ public class MainActivity extends AppCompatActivity {
                             for(int i = 0; i < jsonArray.length(); i++){
                                 JSONObject page = jsonArray.getJSONObject(i);
 
-                                String id = page.getString("id");
-                                String title = page.getString("titel");
-                                String date = page.getString("datum");
+                                if(page.getString("titel").toUpperCase().equals(title.toUpperCase())){
+                                    String title = page.getString("titel");
+                                    String date = page.getString("datum");
+                                    String source = page.getString("innehall");
 
-                                Log.d("JSON", "#" + id + " " + title + ", " + date + "\n\n");
+                                    wikiTitle.setText(title);
+                                    wikiDate.setText(date);
+                                    wikiSource.setText(source);
+                                    wikiSource.setMovementMethod(new ScrollingMovementMethod());
+
+                                    if(debug){
+                                        Log.d("JSON", title + ", " + date + ", " + source);
+                                    }
+                                    break;
+                                }
+
                             }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
