@@ -81,10 +81,9 @@ public class MainActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://10.130.216.101/TP/api.php";
 
-        setContentView(R.layout.fragment_home);
         final TextView wikiTitle = findViewById(R.id.wikiTitle);
         final TextView wikiDate = findViewById(R.id.wikiDate);
-        final MarkdownView wikiSource = (MarkdownView) findViewById(R.id.wikiSource);
+        final MarkdownView wikiSource = findViewById(R.id.wikiSource);
 
         StringRequest strRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>()
@@ -103,13 +102,13 @@ public class MainActivity extends AppCompatActivity {
                                     String date = page.getString("datum");
                                     String source = page.getString("innehall");
 
-                                    wikiTitle.setText(title);
+                                    wikiTitle.setText(title); //TODO: Fix setText, so that it does not open a new activity.
                                     wikiDate.setText(date);
                                     wikiSource.setMarkDownText(source);
 
                                     if(debug){
                                         Log.d("JSON", "--------------START OF DEBUG--------------\n\n");
-                                        Log.d("JSON", title + ", " + date + ", " + source);
+                                        Log.d("JSON", title + ",\n\n" + date + ",\n\n" + source + "\n\n");
                                         Log.d("JSON", "---------------END OF DEBUG---------------\n\n");
                                     }
                                     break;
