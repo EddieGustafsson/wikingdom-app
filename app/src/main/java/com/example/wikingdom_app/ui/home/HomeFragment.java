@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.wikingdom_app.MainActivity;
 import com.example.wikingdom_app.R;
 
 public class HomeFragment extends Fragment {
@@ -27,7 +28,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
-
+                ((MainActivity)getActivity()).jsonParse("Home", true);
             }
         });
         return root;

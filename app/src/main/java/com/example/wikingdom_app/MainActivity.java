@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                jsonParse("Captain America", true);
+                jsonParse("Home", true);
             }
 
         });
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                                     String date = page.getString("datum");
                                     String source = page.getString("innehall");
 
-                                    wikiTitle.setText(title); //TODO: Fix setText, so that it does not open a new activity.
+                                    wikiTitle.setText(title);
                                     wikiDate.setText(date);
                                     wikiSource.setMarkDownText(source);
 
