@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#070000"
-        app:backgroundTint="#FF0000"
+        app:backgroundTint="#858282"
         app:layout_anchor="@id/bottomAppBar"
         app:srcCompat="@drawable/ic_control_point_black_24dp"
         tools:layout_editor_absoluteX="175dp"

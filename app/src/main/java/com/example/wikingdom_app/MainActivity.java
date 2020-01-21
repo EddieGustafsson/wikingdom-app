@@ -74,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        /* Bottom navigation */
+
         bottomAppBar = findViewById(R.id.bottomAppBar);
         bottomAppBar.replaceMenu(R.menu.bottom_bar_menu);
         bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener(){
