@@ -3,9 +3,12 @@ package com.example.wikingdom_app;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -20,6 +23,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.mukesh.MarkdownView;
@@ -34,7 +39,10 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+    private BottomSheetDialog bottomSheetDialog;
     private RequestQueue mQueue;
+
+    BottomAppBar bottomAppBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +73,65 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        bottomAppBar = findViewById(R.id.bottomAppBar);
+        bottomAppBar.replaceMenu(R.menu.bottom_bar_menu);
+        bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener(){
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem){
+                int id = menuItem.getItemId();
+                switch(id){
+                    case R.id.totop:
+                        Toast.makeText(MainActivity.this, "To top Clicked",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.text:
+                        Toast.makeText(MainActivity.this, "Text Clicked",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.search:
+                        Toast.makeText(MainActivity.this, "Search Clicked",Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                return false;
+            }
+        });
+
+        bottomAppBar.setNavigationOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                openToc();
+            }
+
+            private void openToc() {
+                final View bottomNavigation = getLayoutInflater().inflate(R.layout.toc_menu, null);
+                bottomSheetDialog = new BottomSheetDialog(MainActivity.this);
+                bottomSheetDialog.setContentView(bottomNavigation);
+                bottomSheetDialog.show();
+
+                NavigationView navigationView = bottomNavigation.findViewById(R.id.toc_menu);
+                navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                        int id = menuItem.getItemId();
+                        switch(id){
+                            case R.id.test1:
+                                Toast.makeText(MainActivity.this, "Test1 Clicked",Toast.LENGTH_SHORT).show();
+                                bottomSheetDialog.dismiss();
+                                break;
+                            case R.id.test2:
+                                Toast.makeText(MainActivity.this, "Test2 Clicked",Toast.LENGTH_SHORT).show();
+                                bottomSheetDialog.dismiss();
+                                break;
+                            case R.id.test3:
+                                Toast.makeText(MainActivity.this, "Test3 Clicked",Toast.LENGTH_SHORT).show();
+                                bottomSheetDialog.dismiss();
+                                break;
+                        }
+                        return false;
+                    }
+                });
+            }
+        });
+
     }
 
     public void jsonParse(final String title, final boolean debug){

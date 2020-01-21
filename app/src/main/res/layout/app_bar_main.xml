@@ -7,7 +7,6 @@
     tools:context=".MainActivity">
 
 
-
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,15 +21,28 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
+        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="bottom"
+        android:backgroundTint="@color/colorMain"
+        android:elevation="100dp"
+        app:fabAlignmentMode="center"
+        app:navigationIcon="@drawable/ic_format_list_bulleted_black_24dp"/>
+
     <include layout="@layout/content_main" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:background="@color/colorMain"
-        app:srcCompat="@android:drawable/stat_notify_sync" />
+        android:background="#070000"
+        app:backgroundTint="#FF0000"
+        app:layout_anchor="@id/bottomAppBar"
+        app:srcCompat="@drawable/ic_control_point_black_24dp"
+        tools:layout_editor_absoluteX="175dp"
+        tools:layout_editor_absoluteY="663dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

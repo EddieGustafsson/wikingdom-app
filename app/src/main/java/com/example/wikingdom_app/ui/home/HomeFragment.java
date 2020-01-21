@@ -15,6 +15,8 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.wikingdom_app.MainActivity;
 import com.example.wikingdom_app.R;
 
+import java.util.Objects;
+
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
@@ -28,7 +30,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
-                ((MainActivity)getActivity()).jsonParse("Home", true);
+                ((MainActivity) Objects.requireNonNull(getActivity())).jsonParse("Death (Earth-616)", false);
             }
         });
         return root;

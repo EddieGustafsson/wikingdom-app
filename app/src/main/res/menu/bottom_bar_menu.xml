@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/text"
+        android:icon="@drawable/ic_text_fields_black_24dp"
+        android:title="Text"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="Search"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/totop"
+        android:icon="@drawable/ic_arrow_upward_black_24dp"
+        android:title="To top"
+        app:showAsAction="always" />
+</menu>
