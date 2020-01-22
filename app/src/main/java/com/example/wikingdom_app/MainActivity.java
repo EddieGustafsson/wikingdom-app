@@ -1,11 +1,14 @@
 package com.example.wikingdom_app;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.widget.ScrollView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +40,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -89,7 +93,8 @@ public class MainActivity extends AppCompatActivity {
                         scrollToTop();
                         break;
                     case R.id.text:
-                        Toast.makeText(MainActivity.this, "Text Clicked",Toast.LENGTH_SHORT).show();
+                        TextSettingsSheetDialog bottomSheet = new TextSettingsSheetDialog();
+                        bottomSheet.show(getSupportFragmentManager(),"changeTextSize");
                         break;
                     case R.id.search:
                         Toast.makeText(MainActivity.this, "Search Clicked",Toast.LENGTH_SHORT).show();
@@ -139,18 +144,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void changeTextSize(int size){
+        final MarkdownView wikiSource = findViewById(R.id.wikiSource);
+        wikiSource.getSettings().setTextZoom(size);
+    }
+
     public void scrollToTop(){
         final NestedScrollView homeScrollView = findViewById(R.id.homeScrollView);
         homeScrollView.smoothScrollTo(0,0);
     }
 
     public void jsonParse(final String title, final boolean debug){
+        SharedPreferences pref = getSharedPreferences("settings",0);
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://10.130.216.101/TP/api.php";
 
         final TextView wikiTitle = findViewById(R.id.wikiTitle);
         final TextView wikiDate = findViewById(R.id.wikiDate);
         final MarkdownView wikiSource = findViewById(R.id.wikiSource);
+        final int fontSize = pref.getInt("text_size", 2);
 
         StringRequest strRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>()
@@ -172,6 +184,24 @@ public class MainActivity extends AppCompatActivity {
                                     wikiTitle.setText(title);
                                     wikiDate.setText(date);
                                     wikiSource.setMarkDownText(source);
+
+                                    switch(fontSize){
+                                        case 0:
+                                            changeTextSize(60);
+                                            break;
+                                        case 1:
+                                            changeTextSize(80);
+                                            break;
+                                        case 2:
+                                            changeTextSize(100);
+                                            break;
+                                        case 3:
+                                            changeTextSize(120);
+                                            break;
+                                        case 4:
+                                            changeTextSize(140);
+                                            break;
+                                    }
 
                                     if(debug){
                                         Log.d("JSON", "--------------START OF DEBUG--------------");
