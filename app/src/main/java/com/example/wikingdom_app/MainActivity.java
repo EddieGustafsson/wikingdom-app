@@ -5,12 +5,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.NestedScrollView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -84,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 int id = menuItem.getItemId();
                 switch(id){
                     case R.id.totop:
-                        Toast.makeText(MainActivity.this, "To top Clicked",Toast.LENGTH_SHORT).show();
+                        scrollToTop();
                         break;
                     case R.id.text:
                         Toast.makeText(MainActivity.this, "Text Clicked",Toast.LENGTH_SHORT).show();
@@ -105,25 +107,26 @@ public class MainActivity extends AppCompatActivity {
 
             private void openToc() {
                 final View bottomNavigation = getLayoutInflater().inflate(R.layout.toc_menu, null);
+
                 bottomSheetDialog = new BottomSheetDialog(MainActivity.this);
                 bottomSheetDialog.setContentView(bottomNavigation);
                 bottomSheetDialog.show();
-
                 NavigationView navigationView = bottomNavigation.findViewById(R.id.toc_menu);
+
                 navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                         int id = menuItem.getItemId();
                         switch(id){
-                            case R.id.test1:
+                            case R.id.nav1:
                                 Toast.makeText(MainActivity.this, "Test1 Clicked",Toast.LENGTH_SHORT).show();
                                 bottomSheetDialog.dismiss();
                                 break;
-                            case R.id.test2:
+                            case R.id.nav2:
                                 Toast.makeText(MainActivity.this, "Test2 Clicked",Toast.LENGTH_SHORT).show();
                                 bottomSheetDialog.dismiss();
                                 break;
-                            case R.id.test3:
+                            case R.id.nav3:
                                 Toast.makeText(MainActivity.this, "Test3 Clicked",Toast.LENGTH_SHORT).show();
                                 bottomSheetDialog.dismiss();
                                 break;
@@ -134,6 +137,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void scrollToTop(){
+        final NestedScrollView homeScrollView = findViewById(R.id.homeScrollView);
+        homeScrollView.smoothScrollTo(0,0);
     }
 
     public void jsonParse(final String title, final boolean debug){
@@ -166,9 +174,9 @@ public class MainActivity extends AppCompatActivity {
                                     wikiSource.setMarkDownText(source);
 
                                     if(debug){
-                                        Log.d("JSON", "--------------START OF DEBUG--------------\n\n");
+                                        Log.d("JSON", "--------------START OF DEBUG--------------");
                                         Log.d("JSON", title + ",\n\n" + date + ",\n\n" + source + "\n\n");
-                                        Log.d("JSON", "---------------END OF DEBUG---------------\n\n");
+                                        Log.d("JSON", "---------------END OF DEBUG---------------");
                                     }
                                     break;
                                 }
