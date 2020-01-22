@@ -21,6 +21,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -157,6 +158,9 @@ public class MainActivity extends AppCompatActivity {
     public void jsonParse(final String title, final boolean debug){
         SharedPreferences pref = getSharedPreferences("settings",0);
         RequestQueue queue = Volley.newRequestQueue(this);
+        SwipeRefreshLayout swipe;
+        swipe = findViewById(R.id.swipe);
+        swipe.setRefreshing(false);
         String url = "http://10.130.216.101/TP/api.php";
 
         final TextView wikiTitle = findViewById(R.id.wikiTitle);

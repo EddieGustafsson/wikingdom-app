@@ -6,107 +6,114 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/homeScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fadeScrollbars="true">
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/homeScrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:fadeScrollbars="true">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/wikiTitle"
-                    android:layout_width="364dp"
-                    android:layout_height="27dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="30dp"
-                    android:text="@string/wiki_title"
-                    android:textSize="24sp"
-                    app:layout_constraintBottom_toTopOf="@+id/wikiDate"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/text_home"
-                    android:layout_width="59dp"
-                    android:layout_height="19dp"
-                    android:layout_marginStart="263dp"
-                    android:layout_marginTop="29dp"
-                    android:layout_marginEnd="27dp"
-                    android:layout_marginBottom="46dp"
-                    android:text="TextView"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toTopOf="@+id/tabLayout"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/wikiTitle"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:id="@+id/wikiTitle"
+                        android:layout_width="364dp"
+                        android:layout_height="27dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="30dp"
+                        android:text="@string/wiki_title"
+                        android:textSize="24sp"
+                        app:layout_constraintBottom_toTopOf="@+id/wikiDate"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/wikiDate"
-                    android:layout_width="143dp"
-                    android:layout_height="27dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="@string/wiki_date"
-                    android:textSize="18sp"
-                    android:textStyle="italic"
-                    app:layout_constraintBottom_toTopOf="@+id/tabLayout"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/wikiTitle" />
+                    <TextView
+                        android:id="@+id/text_home"
+                        android:layout_width="59dp"
+                        android:layout_height="19dp"
+                        android:layout_marginStart="263dp"
+                        android:layout_marginTop="29dp"
+                        android:layout_marginEnd="27dp"
+                        android:layout_marginBottom="46dp"
+                        android:text="TextView"
+                        android:visibility="invisible"
+                        app:layout_constraintBottom_toTopOf="@+id/tabLayout"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/wikiTitle"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tabLayout"
-                    android:layout_width="368dp"
-                    android:layout_height="37dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="22dp"
-                    android:layout_marginEnd="27dp"
-                    app:layout_constraintBottom_toTopOf="@+id/wikiSource"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/wikiDate">
+                    <TextView
+                        android:id="@+id/wikiDate"
+                        android:layout_width="143dp"
+                        android:layout_height="27dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/wiki_date"
+                        android:textSize="18sp"
+                        android:textStyle="italic"
+                        app:layout_constraintBottom_toTopOf="@+id/tabLayout"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/wikiTitle" />
 
-                    <com.google.android.material.tabs.TabItem
-                        android:layout_width="wrap_content"
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tabLayout"
+                        android:layout_width="368dp"
+                        android:layout_height="37dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="22dp"
+                        android:layout_marginEnd="27dp"
+                        app:layout_constraintBottom_toTopOf="@+id/wikiSource"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/wikiDate">
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tab_article" />
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tab_edit" />
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tab_history" />
+                    </com.google.android.material.tabs.TabLayout>
+
+                    <com.mukesh.MarkdownView
+                        android:id="@+id/wikiSource"
+                        android:layout_width="364dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/tab_article" />
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="27dp"
+                        android:layout_marginBottom="40dp"
+                        android:keepScreenOn="true"
+                        android:nestedScrollingEnabled="true"
+                        android:text="@string/wiki_source"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
-                    <com.google.android.material.tabs.TabItem
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/tab_edit" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <com.google.android.material.tabs.TabItem
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/tab_history" />
-                </com.google.android.material.tabs.TabLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
-                <com.mukesh.MarkdownView
-                    android:id="@+id/wikiSource"
-                    android:layout_width="364dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="27dp"
-                    android:layout_marginBottom="40dp"
-                    android:keepScreenOn="true"
-                    android:nestedScrollingEnabled="true"
-                    android:text="@string/wiki_source"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
