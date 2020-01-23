@@ -34,7 +34,7 @@ public class TextSettingsSheetDialog extends BottomSheetDialogFragment {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
-                SharedPreferences pref = getActivity().getSharedPreferences("settings",0);
+                SharedPreferences pref = Objects.requireNonNull(getActivity()).getSharedPreferences("settings",0);
                 SharedPreferences.Editor editor = pref.edit();
 
                 switch(progress){

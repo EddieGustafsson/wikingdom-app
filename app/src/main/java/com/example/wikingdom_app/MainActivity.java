@@ -6,9 +6,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebSettings;
-import android.widget.ScrollView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +38,6 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -158,10 +154,11 @@ public class MainActivity extends AppCompatActivity {
     public void jsonParse(final String title, final boolean debug){
         SharedPreferences pref = getSharedPreferences("settings",0);
         RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "http://10.130.216.101/TP/api.php";
+
         SwipeRefreshLayout swipe;
         swipe = findViewById(R.id.swipe);
         swipe.setRefreshing(false);
-        String url = "http://10.130.216.101/TP/api.php";
 
         final TextView wikiTitle = findViewById(R.id.wikiTitle);
         final TextView wikiDate = findViewById(R.id.wikiDate);
@@ -212,12 +209,14 @@ public class MainActivity extends AppCompatActivity {
                                         Log.d("JSON", title + ",\n\n" + date + ",\n\n" + source + "\n\n");
                                         Log.d("JSON", "---------------END OF DEBUG---------------");
                                     }
+
                                     break;
                                 }
 
                             }
 
                         } catch (JSONException e) {
+                            Toast.makeText(MainActivity.this, "Error while retrieving data from server",Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -227,6 +226,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error)
                     {
+                        Toast.makeText(MainActivity.this, "Error while retrieving data from server",Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
                 })
@@ -234,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams()
             {
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 params.put("nyckel", "x9qXnagSOsS6sHun");
                 params.put("tjanst", "wiki");
                 params.put("typ", "JSON");

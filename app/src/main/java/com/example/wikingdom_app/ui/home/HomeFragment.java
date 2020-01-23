@@ -20,20 +20,19 @@ import java.util.Objects;
 
 public class HomeFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
-    SwipeRefreshLayout swipe;
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
+        HomeViewModel homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
 
-        swipe = root.findViewById(R.id.swipe);
+        final TextView textView = root.findViewById(R.id.text_home);
+        final String title = "Captain America"; //Declares the home article by it's title.
+
+        SwipeRefreshLayout swipe = root.findViewById(R.id.swipe);
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                ((MainActivity) Objects.requireNonNull(getActivity())).jsonParse("Death (Earth-616)", false);
+                ((MainActivity) Objects.requireNonNull(getActivity())).jsonParse(title, false);
             }
         });
 
@@ -41,7 +40,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
-                ((MainActivity) Objects.requireNonNull(getActivity())).jsonParse("Death (Earth-616)", false);
+                ((MainActivity) Objects.requireNonNull(getActivity())).jsonParse(title, false);
             }
         });
         return root;
