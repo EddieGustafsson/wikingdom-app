@@ -33,6 +33,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="30dp"
                         android:text="@string/wiki_title"
+                        android:textColor="#21232D"
                         android:textSize="24sp"
                         app:layout_constraintBottom_toTopOf="@+id/wikiDate"
                         app:layout_constraintStart_toStartOf="parent"
@@ -94,7 +95,7 @@
                             android:text="@string/tab_history" />
                     </com.google.android.material.tabs.TabLayout>
 
-                    <com.mukesh.MarkdownView
+                    <com.example.wikingdom_app.MarkdownView
                         android:id="@+id/wikiSource"
                         android:layout_width="364dp"
                         android:layout_height="wrap_content"

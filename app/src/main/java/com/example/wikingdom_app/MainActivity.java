@@ -30,7 +30,6 @@ import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.mukesh.MarkdownView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -216,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
                             }
 
                         } catch (JSONException e) {
-                            Toast.makeText(MainActivity.this, "Error while retrieving data from server",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Error while executing request to server",Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }

@@ -4,55 +4,23 @@
     <group android:checkableBehavior="none">
         <item
             android:id="@+id/nav1"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/ic_title_black_24dp"
             android:title="Test" />
         <item
             android:id="@+id/nav2"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/ic_title_black_24dp"
             android:title="Test" />
         <item
             android:id="@+id/nav3"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/ic_title_black_24dp"
             android:title="Test" />
         <item
             android:id="@+id/nav4"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/ic_title_black_24dp"
             android:title="Test" />
         <item
             android:id="@+id/nav5"
-            android:icon="@drawable/ic_menu_share"
-            android:title="Test" />
-        <item
-            android:id="@+id/nav6"
-            android:icon="@drawable/ic_menu_share"
-            android:title="Test" />
-        <item
-            android:id="@+id/nav7"
-            android:icon="@drawable/ic_menu_share"
-            android:title="Test" />
-        <item
-            android:id="@+id/nav8"
-            android:icon="@drawable/ic_menu_share"
-            android:title="Test" />
-        <item
-            android:id="@+id/nav9"
-            android:icon="@drawable/ic_menu_share"
-            android:title="Test" />
-        <item
-            android:id="@+id/nav10"
-            android:icon="@drawable/ic_menu_share"
-            android:title="Test" />
-        <item
-            android:id="@+id/nav11"
-            android:icon="@drawable/ic_menu_share"
-            android:title="Test" />
-        <item
-            android:id="@+id/nav12"
-            android:icon="@drawable/ic_menu_share"
-            android:title="Test" />
-        <item
-            android:id="@+id/nav13"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/ic_title_black_24dp"
             android:title="Test" />
 
     </group>
