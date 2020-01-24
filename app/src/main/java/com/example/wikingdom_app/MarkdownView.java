@@ -55,9 +55,16 @@ public class MarkdownView extends WebView {
             }
 
             @Override public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.getContext().startActivity(
-                        new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
-                return true;
+                String url2="https://marvelwiki.com/"; //All links except this one will be opened in the default android browser.
+                if (url != null && url.startsWith(url2)){
+                    return false;
+                }
+                else
+                {
+                    view.getContext().startActivity(
+                            new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                    return true;
+                }
             }
         });
         loadUrl("file:///android_asset/html/preview.html");
