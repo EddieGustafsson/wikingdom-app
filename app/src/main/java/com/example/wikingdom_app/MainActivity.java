@@ -30,6 +30,7 @@ import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -231,8 +232,7 @@ public class MainActivity extends AppCompatActivity {
                 })
         {
             @Override
-            protected Map<String, String> getParams()
-            {
+            protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("nyckel", "x9qXnagSOsS6sHun");
                 params.put("tjanst", "wiki");

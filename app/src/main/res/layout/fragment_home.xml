@@ -80,16 +80,19 @@
                         app:layout_constraintTop_toBottomOf="@+id/wikiDate">
 
                         <com.google.android.material.tabs.TabItem
+                            android:id="@+id/tabArticle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/tab_article" />
 
                         <com.google.android.material.tabs.TabItem
+                            android:id="@+id/tabEdit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/tab_edit" />
 
                         <com.google.android.material.tabs.TabItem
+                            android:id="@+id/tabHistory"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/tab_history" />

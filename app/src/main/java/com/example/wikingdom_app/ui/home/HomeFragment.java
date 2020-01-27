@@ -1,10 +1,12 @@
 package com.example.wikingdom_app.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -12,9 +14,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import com.example.wikingdom_app.MainActivity;
 import com.example.wikingdom_app.R;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.Objects;
 
@@ -43,6 +45,37 @@ public class HomeFragment extends Fragment {
                 ((MainActivity) Objects.requireNonNull(getActivity())).jsonParse(title, false);
             }
         });
+
+        /* Tabs Layout */
+
+        TabLayout tabLayout = root.findViewById(R.id.tabLayout);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition()) {
+                    case 0:
+                        Log.d("TAB", "Selected Article");
+                        break;
+                    case 1:
+                        Log.d("TAB", "Selected Edit");
+                        break;
+                    case 2:
+                        Log.d("TAB", "Selected History");
+                        break;
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
         return root;
     }
 }
