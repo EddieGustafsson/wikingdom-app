@@ -1,5 +1,6 @@
 package com.example.wikingdom_app.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.wikingdom_app.MainActivity;
 import com.example.wikingdom_app.R;
+import com.example.wikingdom_app.ui.history.HistoryActivity;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.Objects;
@@ -60,7 +62,10 @@ public class HomeFragment extends Fragment {
                         Log.d("TAB", "Selected Edit");
                         break;
                     case 2:
-                        Log.d("TAB", "Selected History");
+                        Intent intent = new Intent(getActivity(), HistoryActivity.class);
+                        intent.putExtra("ARTICLE_NAME", title);
+                        intent.putExtra("ARTILCE_ID", "67");
+                        startActivity(intent);
                         break;
                 }
             }
