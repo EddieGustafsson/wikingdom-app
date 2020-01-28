@@ -1,5 +1,6 @@
 package com.example.wikingdom_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -92,7 +93,8 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Text Clicked",Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.search:
-                        Toast.makeText(MainActivity.this, "Search Clicked",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                        MainActivity.this.startActivity(intent);
                         break;
                 }
                 return false;

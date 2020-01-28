@@ -6,6 +6,15 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+    <string-array name="availableSearches">
+        <item>Me :)</item>
+        <item>Aqua Man</item>
+        <item>Wolverine</item>
+        <item>Batman</item>
+        <item>Bolibompa Draken</item>
+        <item>widePeepoHappy</item>
+    </string-array>
+
     <string name="menu_home">Article</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
