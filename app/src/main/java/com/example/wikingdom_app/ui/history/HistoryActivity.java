@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -46,6 +47,18 @@ public class HistoryActivity extends AppCompatActivity {
         }
 
         jsonParseHistory(id);
+    }
+
+    /* Actionbar back button */
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.onBackPressed();
+                break;
+        }
+        return true;
     }
 
     //Returns an arrayList with history for the selected article id.

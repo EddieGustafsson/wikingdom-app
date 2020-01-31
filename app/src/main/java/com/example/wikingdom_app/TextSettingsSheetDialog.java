@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
 import androidx.annotation.Nullable;
+
+import com.example.wikingdom_app.ui.article.ArticleActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import java.util.Objects;
 
@@ -40,31 +42,31 @@ public class TextSettingsSheetDialog extends BottomSheetDialogFragment {
                 switch(progress){
                         case 0:
                             Log.d("Seekbar", "Active SMALLEST");
-                            ((MainActivity) Objects.requireNonNull(getActivity())).changeTextSize(60);
+                            ((ArticleActivity) Objects.requireNonNull(getActivity())).changeTextSize(60);
                             editor.putInt("text_size", 0);
                             editor.apply();
                             break;
                         case 1:
                             Log.d("Seekbar", "Active SMALLER");
-                            ((MainActivity) Objects.requireNonNull(getActivity())).changeTextSize(80);
+                            ((ArticleActivity) Objects.requireNonNull(getActivity())).changeTextSize(80);
                             editor.putInt("text_size", 1);
                             editor.apply();
                             break;
                         case 2:
                             Log.d("Seekbar", "Active NORMAL");
-                            ((MainActivity) Objects.requireNonNull(getActivity())).changeTextSize(100);
+                            ((ArticleActivity) Objects.requireNonNull(getActivity())).changeTextSize(100);
                             editor.putInt("text_size", 2);
                             editor.apply();
                             break;
                         case 3:
                             Log.d("Seekbar", "Active LARGER");
-                            ((MainActivity) Objects.requireNonNull(getActivity())).changeTextSize(120);
+                            ((ArticleActivity) Objects.requireNonNull(getActivity())).changeTextSize(120);
                             editor.putInt("text_size", 3);
                             editor.apply();
                             break;
                         case 4:
                             Log.d("Seekbar", "Active LARGEST");
-                            ((MainActivity) Objects.requireNonNull(getActivity())).changeTextSize(140);
+                            ((ArticleActivity) Objects.requireNonNull(getActivity())).changeTextSize(140);
                             editor.putInt("text_size", 4);
                             editor.apply();
                             break;

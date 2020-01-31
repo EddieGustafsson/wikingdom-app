@@ -7,33 +7,21 @@
     tools:context=".MainActivity">
 
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorMain"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <include layout="@layout/content_main" />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#070000"
-        android:visibility="invisible"
         app:backgroundTint="#858282"
         app:layout_anchor="@id/bottomAppBar"
         app:srcCompat="@drawable/ic_control_point_black_24dp"
         tools:layout_editor_absoluteX="175dp"
         tools:layout_editor_absoluteY="663dp" />
+
+    <include
+        layout="@layout/activity_article"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
@@ -43,7 +31,6 @@
         android:layout_gravity="bottom"
         android:backgroundTint="@color/colorMain"
         android:elevation="100dp"
-        android:visibility="invisible"
         app:fabAlignmentMode="center"
         app:hideOnScroll="true"
         app:navigationIcon="@drawable/ic_format_list_bulleted_black_24dp" />
