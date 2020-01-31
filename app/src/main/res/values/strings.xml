@@ -21,4 +21,13 @@
     <string name="wiki_date">Date</string>
     <string name="wiki_source">Source</string>
 
+    <string name="edit_hint">Enter your text here&#8230;</string>
+    <string name="bold">Bold</string>
+    <string name="italic">Italic</string>
+    <string name="header">Header</string>
+    <string name="quote">Quote</string>
+    <string name="linebreak">Linebreak</string>
+    <string name="link">Link</string>
+    <string name="image">Image</string>
+
 </resources>
