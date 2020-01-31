@@ -1,4 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/bold_editor_menu"
+        android:icon="@drawable/ic_format_bold_white_24dp"
+        android:title="@string/bold"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/italic_editor_menu"
+        android:icon="@drawable/ic_format_italic_white_24dp"
+        android:title="@string/italic"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/header_editor_menu"
+        android:icon="@drawable/ic_text_fields_black_24dp"
+        android:title="@string/header"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/quote_editor_menu"
+        android:icon="@drawable/ic_format_quote_white_24dp"
+        android:title="@string/quote"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/linebreak_editor_menu"
+        android:icon="@drawable/ic_playlist_add_white_24dp"
+        android:title="@string/linebreak"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/link_editor_menu"
+        android:icon="@drawable/ic_insert_link_white_24dp"
+        android:title="@string/link"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/image_editor_menu"
+        android:icon="@drawable/ic_insert_photo_white_24dp"
+        android:title="@string/image"
+        app:showAsAction="always"/>
 
 </menu>
