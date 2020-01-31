@@ -55,17 +55,19 @@ public class MarkdownView extends WebView {
             }
 
             @Override public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                String url2="https://marvelwiki.com/"; //All links except this one will be opened in the default android browser.
+                String url2="http://localhost/Wiki/"; //All links except this one will be opened in the default android browser.
                 if (url != null && url.startsWith(url2)){
                     return false;
-                }
-                else
-                {
-                    view.getContext().startActivity(
-                            new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                } else {
+                    view.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
                     return true;
                 }
             }
+
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                loadUrl("file:///android_asset/html/error_page.html");
+            }
+
         });
         loadUrl("file:///android_asset/html/preview.html");
         getSettings().setJavaScriptEnabled(true);

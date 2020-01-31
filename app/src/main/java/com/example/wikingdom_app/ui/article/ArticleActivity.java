@@ -1,5 +1,13 @@
-package com.example.wikingdom_app;
+package com.example.wikingdom_app.ui.article;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.NestedScrollView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,26 +17,18 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.widget.NestedScrollView;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.wikingdom_app.MarkdownView;
+import com.example.wikingdom_app.R;
+import com.example.wikingdom_app.TextSettingsSheetDialog;
+import com.example.wikingdom_app.ui.history.HistoryActivity;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
@@ -39,43 +39,29 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
-
-    private AppBarConfiguration mAppBarConfiguration;
+public class ArticleActivity extends AppCompatActivity {
     private BottomSheetDialog bottomSheetDialog;
-    private RequestQueue mQueue;
 
     BottomAppBar bottomAppBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final String title = getIntent().getStringExtra("ARTICLE_NAME"); //Declares the home article by it's title.
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        setContentView(R.layout.article_bar_main);
 
-        mQueue = Volley.newRequestQueue(this);
+        /* ActionBar */
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                jsonParse("Home", true);
-            }
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("Article");
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
-        });
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
-                R.id.nav_tools, R.id.nav_share, R.id.nav_send)
-                .setDrawerLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+        /* Returns JSON article data */
+
+        jsonParseArticle(title, false); //Initializing article data.
 
         /* Bottom navigation */
 
@@ -94,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                         bottomSheet.show(getSupportFragmentManager(),"changeTextSize");
                         break;
                     case R.id.search:
-                        Toast.makeText(MainActivity.this, "Search Clicked",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ArticleActivity.this, "Search Clicked",Toast.LENGTH_SHORT).show();
                         break;
                 }
                 return false;
@@ -110,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
             private void openToc() {
                 final View bottomNavigation = getLayoutInflater().inflate(R.layout.toc_menu, null);
 
-                bottomSheetDialog = new BottomSheetDialog(MainActivity.this);
+                bottomSheetDialog = new BottomSheetDialog(ArticleActivity.this);
                 bottomSheetDialog.setContentView(bottomNavigation);
                 bottomSheetDialog.show();
                 NavigationView navigationView = bottomNavigation.findViewById(R.id.toc_menu);
@@ -121,15 +107,15 @@ public class MainActivity extends AppCompatActivity {
                         int id = menuItem.getItemId();
                         switch(id){
                             case R.id.nav1:
-                                Toast.makeText(MainActivity.this, "Test1 Clicked",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ArticleActivity.this, "Test1 Clicked",Toast.LENGTH_SHORT).show();
                                 bottomSheetDialog.dismiss();
                                 break;
                             case R.id.nav2:
-                                Toast.makeText(MainActivity.this, "Test2 Clicked",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ArticleActivity.this, "Test2 Clicked",Toast.LENGTH_SHORT).show();
                                 bottomSheetDialog.dismiss();
                                 break;
                             case R.id.nav3:
-                                Toast.makeText(MainActivity.this, "Test3 Clicked",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ArticleActivity.this, "Test3 Clicked",Toast.LENGTH_SHORT).show();
                                 bottomSheetDialog.dismiss();
                                 break;
                         }
@@ -139,19 +125,64 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /* Swipe Refresh */
+
+        SwipeRefreshLayout swipe = findViewById(R.id.swipe);
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                jsonParseArticle(title, false);
+            }
+        });
+
+        /* Tabs Layout */
+
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition()) {
+                    case 0:
+                        Log.d("TAB", "Selected Article");
+                        break;
+                    case 1:
+                        Log.d("TAB", "Selected Edit");
+                        break;
+                    case 2:
+                        Intent intent = new Intent(ArticleActivity.this, HistoryActivity.class);
+                        intent.putExtra("ARTICLE_NAME", title);
+                        intent.putExtra("ARTILCE_ID", "67");
+                        startActivity(intent);
+                        break;
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
     }
 
-    public void changeTextSize(int size){
-        final MarkdownView wikiSource = findViewById(R.id.wikiSource);
-        wikiSource.getSettings().setTextZoom(size);
+    /* Actionbar back button */
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.onBackPressed();
+                break;
+        }
+        return true;
     }
 
-    public void scrollToTop(){
-        final NestedScrollView homeScrollView = findViewById(R.id.homeScrollView);
-        homeScrollView.smoothScrollTo(0,0);
-    }
-
-    public void jsonParse(final String title, final boolean debug){
+    public void jsonParseArticle(final String title, final boolean debug){
         SharedPreferences pref = getSharedPreferences("settings",0);
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://10.130.216.101/TP/api.php";
@@ -183,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
                                     String source = page.getString("innehall");
 
                                     wikiTitle.setText(title);
-                                    wikiDate.setText(date);
+                                    wikiDate.setText("Last Modified: "+date);
                                     wikiSource.setMarkDownText(source);
 
                                     switch(fontSize){
@@ -216,7 +247,7 @@ public class MainActivity extends AppCompatActivity {
                             }
 
                         } catch (JSONException e) {
-                            Toast.makeText(MainActivity.this, "Error while executing request to server",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ArticleActivity.this, "Error while executing request to server",Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -226,7 +257,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error)
                     {
-                        Toast.makeText(MainActivity.this, "Error while retrieving data from server",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ArticleActivity.this, "Error while retrieving data from server",Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
                 })
@@ -246,6 +277,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void changeTextSize(int size){
+        final MarkdownView wikiSource = findViewById(R.id.wikiSource);
+        wikiSource.getSettings().setTextZoom(size);
+    }
+
+    public void scrollToTop(){
+        final NestedScrollView homeScrollView = findViewById(R.id.homeScrollView);
+        homeScrollView.smoothScrollTo(0,0);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -253,10 +294,4 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
 }
