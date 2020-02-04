@@ -97,6 +97,7 @@ public class EditActivity extends AppCompatActivity {
                     textInputEditText.getText().insert(startSelection, emptyBold);
                     textInputEditText.setSelection(currentPosition);
                 }
+                headerTier = 1;
                 break;
             case "italic":
                 if(!selectedText.isEmpty()) {
@@ -104,11 +105,12 @@ public class EditActivity extends AppCompatActivity {
                     String editText = allText.replace(selectedText, editedText);
                     textInputEditText.setText(editText);
                 }else{
-                    int currentPosition = startSelection;
+                    int currentPosition = startSelection + 1;
                     String emptyBold = "**";
                     textInputEditText.getText().insert(startSelection, emptyBold);
                     textInputEditText.setSelection(currentPosition);
                 }
+                headerTier = 1;
                 break;
             case "header":
                 if(!selectedText.isEmpty()) {
@@ -147,20 +149,24 @@ public class EditActivity extends AppCompatActivity {
                     String editText = allText.replace(selectedText, editedText);
                     textInputEditText.setText(editText);
                 }else{
-                    int currentPosition = startSelection;
+                    int currentPosition = startSelection + 1;
                     String emptyBold = ">";
                     textInputEditText.getText().insert(startSelection, emptyBold);
                     textInputEditText.setSelection(currentPosition);
                 }
+                headerTier = 1;
                 break;
             case "linebreak":
                 Toast.makeText(EditActivity.this, "Linebreaks are not implemented yet...", Toast.LENGTH_SHORT).show();
+                headerTier = 1;
                 break;
             case "link":
                 Toast.makeText(EditActivity.this, "Links are not implemented yet...", Toast.LENGTH_SHORT).show();
+                headerTier = 1;
                 break;
             case "image":
                 Toast.makeText(EditActivity.this, "Images are not implemented yet...", Toast.LENGTH_SHORT).show();
+                headerTier = 1;
                 break;
         }
     }
