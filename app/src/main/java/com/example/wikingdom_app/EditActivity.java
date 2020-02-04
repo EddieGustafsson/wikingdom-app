@@ -19,6 +19,8 @@ import java.util.Objects;
 
 public class EditActivity extends AppCompatActivity {
 
+    private int headerTier = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +85,6 @@ public class EditActivity extends AppCompatActivity {
         int endSelection = textInputEditText.getSelectionEnd();
         String allText = Objects.requireNonNull(textInputEditText.getText()).toString();
         String selectedText = allText.substring(startSelection, endSelection);
-        //final SpannableStringBuilder stringBuilder = new SpannableStringBuilder(textInputEditText.getText().toString());
         switch(mode){
             case "bold":
                 if(!selectedText.isEmpty()) {
@@ -91,14 +92,11 @@ public class EditActivity extends AppCompatActivity {
                     String editText = allText.replace(selectedText, editedText);
                     textInputEditText.setText(editText);
                 }else{
-                    int currentPosition = startSelection;
+                    int currentPosition = startSelection + 2;
                     String emptyBold = "****";
-                    textInputEditText.getText().insert(currentPosition, emptyBold);
+                    textInputEditText.getText().insert(startSelection, emptyBold);
                     textInputEditText.setSelection(currentPosition);
                 }
-                /*final StyleSpan boldText = new StyleSpan(android.graphics.Typeface.BOLD);
-                stringBuilder.setSpan(boldText, startSelection, endSelection, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-                textInputEditText.setText(stringBuilder);*/
                 break;
             case "italic":
                 if(!selectedText.isEmpty()) {
@@ -108,20 +106,39 @@ public class EditActivity extends AppCompatActivity {
                 }else{
                     int currentPosition = startSelection;
                     String emptyBold = "**";
-                    textInputEditText.getText().insert(currentPosition, emptyBold);
+                    textInputEditText.getText().insert(startSelection, emptyBold);
                     textInputEditText.setSelection(currentPosition);
                 }
                 break;
             case "header":
                 if(!selectedText.isEmpty()) {
-                    String editedText = "#" + selectedText + "#";
-                    String editText = allText.replace(selectedText, editedText);
+                    StringBuffer output = new StringBuffer(headerTier);
+                    int currentPosition = startSelection + selectedText.length() + headerTier;
+                    for(int i = 0; i < headerTier; i++){
+                        output.append("#");
+                    }
+                    output.append(selectedText);
+                    String editText = allText.replace(selectedText, output);
                     textInputEditText.setText(editText);
-                }else{
-                    int currentPosition = startSelection;
-                    String emptyBold = "##";
-                    textInputEditText.getText().insert(currentPosition, emptyBold);
                     textInputEditText.setSelection(currentPosition);
+                    if(headerTier >= 5){
+                        headerTier = 1;
+                    }else{
+                        headerTier++;
+                    }
+                }else{
+                    StringBuffer output = new StringBuffer(headerTier);
+                    int currentPosition = startSelection + headerTier;
+                    for(int j = 0; j < headerTier; j++){
+                        output.append("#");
+                    }
+                    textInputEditText.getText().insert(startSelection, output);
+                    textInputEditText.setSelection(currentPosition);
+                    if(headerTier >= 5) {
+                        headerTier = 1;
+                    }else{
+                        headerTier++;
+                    }
                 }
                 break;
             case "quote":
@@ -132,7 +149,7 @@ public class EditActivity extends AppCompatActivity {
                 }else{
                     int currentPosition = startSelection;
                     String emptyBold = ">";
-                    textInputEditText.getText().insert(currentPosition, emptyBold);
+                    textInputEditText.getText().insert(startSelection, emptyBold);
                     textInputEditText.setSelection(currentPosition);
                 }
                 break;
