@@ -33,6 +33,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.wikingdom_app.MainActivity;
 import com.example.wikingdom_app.MarkdownView;
 import com.example.wikingdom_app.R;
+import com.example.wikingdom_app.Utility;
 import com.example.wikingdom_app.ui.article.ArticleActivity;
 import com.example.wikingdom_app.ui.history.HistoryActivity;
 import com.example.wikingdom_app.ui.history.HistoryAdapter;
@@ -120,8 +121,9 @@ public class HomeFragment extends Fragment implements MaterialSearchBar.OnSearch
                 if(searchBar.getText().trim().equals("")){
                     lv.setVisibility(View.GONE);
                 } else {
-                    lv.setVisibility(View.VISIBLE);
                     adapter.getFilter().filter(s);
+                    Utility.setListViewHeightBasedOnChildren(lv);
+                    lv.setVisibility(View.VISIBLE);
                 }
             }
 

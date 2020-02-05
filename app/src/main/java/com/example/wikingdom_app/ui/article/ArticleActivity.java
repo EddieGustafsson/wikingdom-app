@@ -148,15 +148,15 @@ public class ArticleActivity extends AppCompatActivity {
                         break;
                     case 1:
                         Log.d("TAB", "Selected Edit");
-                        Intent intent2 = new Intent(ArticleActivity.this, EditActivity.class);
-                        startActivity(intent2);
+                        Intent editorIntent = new Intent(ArticleActivity.this, EditActivity.class);
+                        startActivity(editorIntent);
                         break;
                     case 2:
                         TextView wikiId = findViewById(R.id.wikiId);
-                        Intent intent = new Intent(ArticleActivity.this, HistoryActivity.class);
-                        intent.putExtra("ARTICLE_NAME", title);
-                        intent.putExtra("ARTILCE_ID", wikiId.getText());
-                        startActivity(intent);
+                        Intent historyIntent = new Intent(ArticleActivity.this, HistoryActivity.class);
+                        historyIntent.putExtra("ARTICLE_NAME", title);
+                        historyIntent.putExtra("ARTILCE_ID", wikiId.getText());
+                        startActivity(historyIntent);
                         break;
                 }
             }
@@ -178,10 +178,8 @@ public class ArticleActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.onBackPressed();
-                break;
+        if (item.getItemId() == android.R.id.home) {
+            this.onBackPressed();
         }
         return true;
     }
