@@ -14,17 +14,64 @@
         <androidx.core.widget.NestedScrollView
             android:id="@+id/homeScrollView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:fadeScrollbars="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="8dp"
+                        app:cardBackgroundColor="#FFFFFF"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="8dp"
+                        app:layout_constraintBottom_toTopOf="@+id/gridLayout"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/searchBar"
+                        app:layout_constraintVertical_bias="0.094">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|center_vertical"
+                            android:layout_margin="16dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/welcome_message"
+                                android:textAlignment="center"
+                                android:textColor="@android:color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/textView2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/build_version"
+                                android:textAlignment="center" />
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
 
                     <TextView
                         android:id="@+id/text_home"
@@ -37,16 +84,72 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="24dp"
+                        app:cardBackgroundColor="#FFFFFF"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/cardView"
+                        app:layout_constraintVertical_bias="0.0">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|center_vertical"
+                            android:layout_margin="16dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/wikiTitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="TextView"
+                                android:visibility="gone" />
+
+                            <TextView
+                                android:id="@+id/wikiDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="TextView"
+                                android:visibility="gone"
+                                tools:visibility="gone" />
+
+                            <TextView
+                                android:id="@+id/wikiId"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="TextView"
+                                android:visibility="gone"
+                                tools:visibility="gone" />
+
+                            <com.example.wikingdom_app.MarkdownView
+                                android:id="@+id/wikiSource"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent" />
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
                     <com.mancj.materialsearchbar.MaterialSearchBar
                         android:id="@+id/searchBar"
                         style="@style/MaterialSearchBarLight"
                         android:layout_width="0dp"
-                        android:layout_height="48dp"
-                        android:layout_marginStart="51dp"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginEnd="51dp"
-                        android:layout_marginBottom="24dp"
-                        android:background="#FFFFFF"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="20dp"
                         android:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="@+id/text_home"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -61,66 +164,39 @@
 
                     </com.mancj.materialsearchbar.MaterialSearchBar>
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="289dp"
-                        android:layout_height="100dp"
-                        android:layout_rowWeight="1"
-                        android:layout_columnWeight="1"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginBottom="16dp"
-                        app:cardBackgroundColor="#FFFFFF"
-                        app:cardCornerRadius="8dp"
-                        app:cardElevation="8dp"
-                        app:layout_constraintBottom_toTopOf="@+id/gridLayout"
+                    <ListView
+                        android:id="@+id/mListView"
+                        android_id="@+id/mListView"
+                        android_layout_height="match_parent"
+                        android_layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="#FFFFFF"
+                        android:elevation="100dp"
+                        android:scrollbars="none"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/searchBar"
-                        app:layout_constraintVertical_bias="0.146">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal|center_vertical"
-                            android:layout_margin="16dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Welcome to the Marvel Wiki!"
-                                android:textAlignment="center"
-                                android:textColor="@android:color/black"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/textView2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Dev build 0.0.3"
-                                android:textAlignment="center" />
-
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+                        app:layout_constraintTop_toBottomOf="@+id/searchBar"></ListView>
 
                     <GridLayout
                         android:id="@+id/gridLayout"
                         android:layout_width="0dp"
-                        android:layout_height="229dp"
+                        android:layout_height="0dp"
                         android:layout_marginStart="35dp"
-                        android:layout_marginTop="130dp"
+                        android:layout_marginTop="270dp"
                         android:layout_marginEnd="35dp"
                         android:layout_marginBottom="64dp"
                         android:alignmentMode="alignMargins"
                         android:columnCount="2"
                         android:columnOrderPreserved="false"
                         android:rowCount="3"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/searchBar">
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <!-- Row 1 -->
                         <!-- Col 1 -->

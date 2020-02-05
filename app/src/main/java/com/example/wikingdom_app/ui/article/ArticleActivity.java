@@ -23,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.wikingdom_app.EditActivity;
 import com.example.wikingdom_app.MarkdownView;
 import com.example.wikingdom_app.R;
 import com.example.wikingdom_app.TextSettingsSheetDialog;
@@ -147,11 +148,14 @@ public class ArticleActivity extends AppCompatActivity {
                         break;
                     case 1:
                         Log.d("TAB", "Selected Edit");
+                        Intent intent2 = new Intent(ArticleActivity.this, EditActivity.class);
+                        startActivity(intent2);
                         break;
                     case 2:
+                        TextView wikiId = findViewById(R.id.wikiId);
                         Intent intent = new Intent(ArticleActivity.this, HistoryActivity.class);
                         intent.putExtra("ARTICLE_NAME", title);
-                        intent.putExtra("ARTILCE_ID", "67");
+                        intent.putExtra("ARTILCE_ID", wikiId.getText());
                         startActivity(intent);
                         break;
                 }
@@ -193,6 +197,7 @@ public class ArticleActivity extends AppCompatActivity {
 
         final TextView wikiTitle = findViewById(R.id.wikiTitle);
         final TextView wikiDate = findViewById(R.id.wikiDate);
+        final TextView wikiId = findViewById(R.id.wikiId);
         final MarkdownView wikiSource = findViewById(R.id.wikiSource);
         final int fontSize = pref.getInt("text_size", 2);
 
@@ -210,11 +215,13 @@ public class ArticleActivity extends AppCompatActivity {
 
                                 if(page.getString("titel").toUpperCase().equals(title.toUpperCase())){
                                     String title = page.getString("titel");
+                                    String id = page.getString("id");
                                     String date = page.getString("datum");
                                     String source = page.getString("innehall");
 
                                     wikiTitle.setText(title);
-                                    wikiDate.setText("Last Modified: "+date);
+                                    wikiId.setText(id);
+                                    wikiDate.setText("Last Modified: " + date);
                                     wikiSource.setMarkDownText(source);
 
                                     switch(fontSize){

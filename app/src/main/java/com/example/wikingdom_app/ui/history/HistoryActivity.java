@@ -79,7 +79,8 @@ public class HistoryActivity extends AppCompatActivity {
 
                             for(int i = 0; i < jsonArray.length(); i++){
                                 JSONObject page = jsonArray.getJSONObject(i);
-                                historyItemArrayList.add(new HistoryAdapter.HistoryItem("#" + page.getString("id") + " " + page.getString("titel"), page.getString("datum")));
+                                int x = i+1;
+                                historyItemArrayList.add(new HistoryAdapter.HistoryItem("#" + x + " " + page.getString("titel"), page.getString("datum")));
                             }
 
                             Collections.reverse(historyItemArrayList);
@@ -95,7 +96,7 @@ public class HistoryActivity extends AppCompatActivity {
                         } catch (JSONException e) {
 
                             ArrayList<HistoryAdapter.HistoryItem> historyItemArrayList = new ArrayList<>();
-                            historyItemArrayList.add(new HistoryAdapter.HistoryItem("Info", "No previous versions of this article."));
+                            historyItemArrayList.add(new HistoryAdapter.HistoryItem("Information", "No previous versions of this article."));
 
                             mRecyclerView = findViewById(R.id.recyclerView);
                             mRecyclerView.setHasFixedSize(true);

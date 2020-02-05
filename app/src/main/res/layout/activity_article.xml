@@ -59,7 +59,7 @@
                         android:layout_width="273dp"
                         android:layout_height="29dp"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="16dp"
                         android:layout_marginBottom="5dp"
                         android:text="@string/wiki_date"
                         android:textSize="14sp"
@@ -116,6 +116,21 @@
                         app:layout_constraintTop_toBottomOf="@+id/tabLayout" >
 
                     </com.example.wikingdom_app.MarkdownView>
+
+                    <TextView
+                        android:id="@+id/wikiId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginBottom="32dp"
+                        android:text="TextView"
+                        android:visibility="invisible"
+                        app:layout_constraintBottom_toTopOf="@+id/tabLayout"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/wikiDate"
+                        app:layout_constraintTop_toBottomOf="@+id/wikiTitle" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
