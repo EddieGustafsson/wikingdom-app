@@ -54,6 +54,10 @@ public class EditActivity extends AppCompatActivity {
                             mode = "quote";
                             setMode(mode);
                             break;
+                        case R.id.list_editor_menu:
+                            mode = "list";
+                            setMode(mode);
+                            break;
                         case R.id.linebreak_editor_menu:
                             mode = "linebreak";
                             setMode(mode);
@@ -76,6 +80,14 @@ public class EditActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if(item.getItemId() == android.R.id.home){
+            this.onBackPressed();
+        }
         return true;
     }
 
@@ -154,6 +166,10 @@ public class EditActivity extends AppCompatActivity {
                     textInputEditText.getText().insert(startSelection, emptyBold);
                     textInputEditText.setSelection(currentPosition);
                 }
+                headerTier = 1;
+                break;
+            case "list":
+                Toast.makeText(EditActivity.this, "Lists are not implemented yet...", Toast.LENGTH_SHORT).show();
                 headerTier = 1;
                 break;
             case "linebreak":
