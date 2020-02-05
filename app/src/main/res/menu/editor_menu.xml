@@ -27,6 +27,12 @@
         app:showAsAction="always"/>
 
     <item
+        android:id="@+id/list_editor_menu"
+        android:icon="@drawable/ic_format_list_bulleted_white_24dp"
+        android:title="@string/list"
+        app:showAsAction="always"/>
+
+    <item
         android:id="@+id/linebreak_editor_menu"
         android:icon="@drawable/ic_playlist_add_white_24dp"
         android:title="@string/linebreak"
