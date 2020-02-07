@@ -42,6 +42,7 @@ import java.util.Map;
 
 public class ArticleActivity extends AppCompatActivity {
     private BottomSheetDialog bottomSheetDialog;
+    private String source;
 
     BottomAppBar bottomAppBar;
 
@@ -147,8 +148,9 @@ public class ArticleActivity extends AppCompatActivity {
                         Log.d("TAB", "Selected Article");
                         break;
                     case 1:
-                        Log.d("TAB", "Selected Edit");
                         Intent intent2 = new Intent(ArticleActivity.this, EditActivity.class);
+                        intent2.putExtra("ARTICLE_NAME", title);
+                        intent2.putExtra("ARTICLE_SOURCE", source);
                         startActivity(intent2);
                         break;
                     case 2:
@@ -217,7 +219,7 @@ public class ArticleActivity extends AppCompatActivity {
                                     String title = page.getString("titel");
                                     String id = page.getString("id");
                                     String date = page.getString("datum");
-                                    String source = page.getString("innehall");
+                                    source = page.getString("innehall");
 
                                     wikiTitle.setText(title);
                                     wikiId.setText(id);
