@@ -22,7 +22,7 @@
     <string name="wiki_source">Source</string>
 
     <string name="welcome_message">Welcome to the Marvel Wiki!</string>
-    <string name="build_version">Dev build 0.0.1</string>
+    <string name="build_version">Dev build 0.1.3</string>
 
     <string name="edit_hint">Enter your text here&#8230;</string>
     <string name="bold">Bold</string>

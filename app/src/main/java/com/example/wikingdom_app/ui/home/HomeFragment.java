@@ -122,7 +122,7 @@ public class HomeFragment extends Fragment implements MaterialSearchBar.OnSearch
                     lv.setVisibility(View.GONE);
                 } else {
                     adapter.getFilter().filter(s);
-                    Utility.setListViewHeightBasedOnChildren(lv);
+                    //Utility.setListViewHeightBasedOnChildren(lv);
                     lv.setVisibility(View.VISIBLE);
                 }
             }
