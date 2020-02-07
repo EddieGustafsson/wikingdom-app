@@ -20,16 +20,24 @@ import java.util.Objects;
 public class EditActivity extends AppCompatActivity {
 
     private int headerTier = 1;
+    private TextInputEditText textInputEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
+
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null){
             actionBar.setTitle("Editor");
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
+        final String title = getIntent().getStringExtra("ARTICLE_NAME");
+        final String source = getIntent().getStringExtra("ARTICLE_SOURCE");
+        textInputEditText = findViewById(R.id.textEditor);
+        textInputEditText.setText(source);
+
         BottomAppBar bottomAppBar = findViewById(R.id.bottomAppBarEditor);
         bottomAppBar.replaceMenu(R.menu.editor_menu);
         bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener(){
@@ -92,7 +100,7 @@ public class EditActivity extends AppCompatActivity {
     }
 
     public void setMode(String mode){
-        TextInputEditText textInputEditText = findViewById(R.id.textEditor);
+        textInputEditText = findViewById(R.id.textEditor);
         int startSelection = textInputEditText.getSelectionStart();
         int endSelection = textInputEditText.getSelectionEnd();
         String allText = Objects.requireNonNull(textInputEditText.getText()).toString();
@@ -127,10 +135,11 @@ public class EditActivity extends AppCompatActivity {
             case "header":
                 if(!selectedText.isEmpty()) {
                     StringBuffer output = new StringBuffer(headerTier);
-                    int currentPosition = startSelection + selectedText.length() + headerTier;
+                    int currentPosition = startSelection + selectedText.length() + headerTier + 1;
                     for(int i = 0; i < headerTier; i++){
                         output.append("#");
                     }
+                    output.append(" ");
                     output.append(selectedText);
                     String editText = allText.replace(selectedText, output);
                     textInputEditText.setText(editText);
@@ -142,10 +151,11 @@ public class EditActivity extends AppCompatActivity {
                     }
                 }else{
                     StringBuffer output = new StringBuffer(headerTier);
-                    int currentPosition = startSelection + headerTier;
+                    int currentPosition = startSelection + headerTier + 1;
                     for(int j = 0; j < headerTier; j++){
                         output.append("#");
                     }
+                    output.append(" ");
                     textInputEditText.getText().insert(startSelection, output);
                     textInputEditText.setSelection(currentPosition);
                     if(headerTier >= 5) {
