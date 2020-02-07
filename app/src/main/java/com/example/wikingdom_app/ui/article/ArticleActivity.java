@@ -27,6 +27,7 @@ import com.example.wikingdom_app.EditActivity;
 import com.example.wikingdom_app.MarkdownView;
 import com.example.wikingdom_app.R;
 import com.example.wikingdom_app.TextSettingsSheetDialog;
+import com.example.wikingdom_app.ui.create.CreateActivity;
 import com.example.wikingdom_app.ui.history.HistoryActivity;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -63,7 +64,7 @@ public class ArticleActivity extends AppCompatActivity {
 
         /* Returns JSON article data */
 
-        jsonParseArticle(title, false); //Initializing article data.
+        jsonParseArticle(title, true); //Initializing article data.
 
         /* Bottom navigation */
 
@@ -217,7 +218,7 @@ public class ArticleActivity extends AppCompatActivity {
                                     String title = page.getString("titel");
                                     String id = page.getString("id");
                                     String date = page.getString("datum");
-                                    source = page.getString("innehall");
+                                    String source = page.getString("innehall");
 
                                     wikiTitle.setText(title);
                                     wikiId.setText(id);
@@ -249,9 +250,20 @@ public class ArticleActivity extends AppCompatActivity {
                                     }
 
                                     break;
+                                } else {
+                                    Log.d("ARTICLE", "Try " + i + ", for article title '" + title + "' not found.");
+                                    if (i == jsonArray.length()-1){
+                                        Log.d("ARTICLE", "Open create activity");
+
+                                        Intent intent = new Intent(ArticleActivity.this, CreateActivity.class);
+                                        intent.putExtra("ARTICLE_NAME", title);
+                                        startActivity(intent);
+                                    }
                                 }
 
                             }
+
+
 
                         } catch (JSONException e) {
                             Toast.makeText(ArticleActivity.this, "Error while executing request to server",Toast.LENGTH_SHORT).show();
