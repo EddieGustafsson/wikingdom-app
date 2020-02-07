@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private BottomSheetDialog bottomSheetDialog;
     private RequestQueue mQueue;
-    private final List<String> suggestionsList = new ArrayList<>();
 
     BottomAppBar bottomAppBar;
 
