@@ -31,6 +31,7 @@ import com.example.wikingdom_app.ui.create.CreateActivity;
 import com.example.wikingdom_app.ui.history.HistoryActivity;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
@@ -40,6 +41,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class ArticleActivity extends AppCompatActivity {
     private BottomSheetDialog bottomSheetDialog;
@@ -166,7 +168,8 @@ public class ArticleActivity extends AppCompatActivity {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
+                TabLayout tabhost = ArticleActivity.this.findViewById(R.id.tabLayout);
+                Objects.requireNonNull(tabhost.getTabAt(0)).select();
             }
 
             @Override
@@ -218,7 +221,7 @@ public class ArticleActivity extends AppCompatActivity {
                                     String title = page.getString("titel");
                                     String id = page.getString("id");
                                     String date = page.getString("datum");
-                                    String source = page.getString("innehall");
+                                    source = page.getString("innehall");
 
                                     wikiTitle.setText(title);
                                     wikiId.setText(id);
@@ -312,5 +315,7 @@ public class ArticleActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
+
 
 }
