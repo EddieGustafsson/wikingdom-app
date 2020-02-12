@@ -11,6 +11,9 @@ import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import com.example.wikingdom_app.ui.article.ArticleActivity;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -19,6 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -59,7 +63,12 @@ public class MarkdownView extends WebView {
                 if (url != null && url.startsWith(url2)){
                     return false;
                 } else {
-                    view.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                    String article = Objects.requireNonNull(url).replaceAll("http://(?:www\\.)?([a-z0-9\\-]+)(?:[/]?).*","$1");
+
+                    Intent intent = new Intent(view.getContext(), ArticleActivity.class);
+                    intent.putExtra("ARTICLE_NAME", article);
+                    view.getContext().startActivity(intent);
+
                     return true;
                 }
             }

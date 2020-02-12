@@ -17,8 +17,8 @@
     <string name="tab_edit">Edit</string>
     <string name="tab_history">History</string>
 
-    <string name="wiki_title">Title</string>
-    <string name="wiki_date">Date</string>
+    <string name="wiki_title">Loading...</string>
+    <string name="wiki_date"></string>
     <string name="wiki_source">Source</string>
 
     <string name="welcome_message">Welcome to the Marvel Wiki!</string>
